@@ -1,0 +1,59 @@
+name: Smoke check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 3 * * *"   # يوميًا 6:00 صباحًا بتوقيت الرياض
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: الملفات الأساسية موجودة
+        run: |
+          for f in index.html config.js sw.js manifest.webmanifest privacy.html icon-192.png icon-512.png; do
+            test -s "$f" || { echo "::error::الملف مفقود أو فارغ: $f"; exit 1; }
+          done
+          test -d assets || { echo "::error::مجلد assets مفقود"; exit 1; }
+
+      - name: manifest صالح
+        run: python3 -c "import json; json.load(open('manifest.webmanifest', encoding='utf-8'))"
+
+      - name: فحص أسرار مكشوفة في الملفات
+        run: |
+          # مفتاح Supabase السري الحقيقي يجب ألا يظهر أبدًا في الموقع المنشور
+          if grep -rIl -E "sb_secret_[A-Za-z0-9_-]{20,}" --exclude-dir=.git --exclude-dir=.github . ; then
+            echo "::error::وُجد مفتاح سري sb_secret في الملفات"; exit 1
+          fi
+          # أي JWT يجب أن يكون anon فقط
+          python3 - <<'PY'
+          import re, base64, json, pathlib
+          bad = []
+          for p in pathlib.Path('.').rglob('*'):
+              if '.git' in p.parts or not p.is_file(): continue
+              try: t = p.read_text(encoding='utf-8', errors='ignore')
+              except Exception: continue
+              for m in re.findall(r'eyJ[A-Za-z0-9_-]+\.([A-Za-z0-9_-]+)\.[A-Za-z0-9_-]+', t):
+                  try:
+                      d = json.loads(base64.urlsafe_b64decode(m + '=' * (-len(m) % 4)))
+                      if d.get('role') not in (None, 'anon'): bad.append((str(p), d.get('role')))
+                  except Exception: pass
+          if bad:
+              print('::error::JWT بدور غير anon:', bad); raise SystemExit(1)
+          PY
+
+      - name: الموقع المنشور يعمل
+        if: github.event_name != 'pull_request'
+        run: |
+          url="https://hassanmelhadry-collab.github.io/hr-cloud/"
+          code=$(curl -s -o /dev/null -w "%{http_code}" --retry 3 --retry-delay 10 "$url")
+          echo "HTTP $code"
+          test "$code" = "200" || { echo "::error::الموقع لا يستجيب ($code)"; exit 1; }
