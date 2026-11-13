@@ -1,5 +1,5 @@
-// إعداد الاتصال بقاعدة البيانات السحابية (Supabase) — Project Settings ← API
+// إعداد الاتصال بقاعدة البيانات السحابية (Supabase) — Project Settings ← API Keys
 window.HR_CLOUD = {
-  url: '',   // مثال: https://abcdxyz.supabase.co
-  key: '',   // anon public key  أو  publishable key
+  url: 'https://dqsukhfabpkhudzwepkt.supabase.co',
+  key: 'sb_publishable_DhyhnV1McDKRvVDe3TIGTw_HRcq-zQ8',
 };
