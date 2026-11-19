@@ -1,6 +1,28 @@
 {
 "docs": [
 {
+"id": "pdpl",
+"title": "نظام حماية البيانات الشخصية",
+"issuer": "هيئة الخبراء بمجلس الوزراء",
+"kind": "نظام",
+"legal": "مرسوم ملكي رقم م/19 وتاريخ 9/2/1443هـ",
+"source": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/b7cfae89-828e-4994-b167-adaa00e37188/1",
+"fetched_at": "2026-11-19",
+"sha256": "3d6ddee032980b8755bebb805aa6a5427aa6157da8b2d70fe5b6da0dd30abbf7",
+"count": 43
+},
+{
+"id": "gosi-law",
+"title": "نظام التأمينات الاجتماعية",
+"issuer": "هيئة الخبراء بمجلس الوزراء",
+"kind": "نظام",
+"legal": "مرسوم ملكي رقم م/273 وتاريخ 26/12/1445هـ",
+"source": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/eaee8a20-3a54-4aaf-b0d9-b1ad00998962/1",
+"fetched_at": "2026-11-19",
+"sha256": "e0cc12fd2e1ce944e1c23c7bfe1a0b369758ecd89c987559e6e5f27a052b550f",
+"count": 63
+},
+{
 "id": "labor-law",
 "title": "نظام العمل",
 "issuer": "هيئة الخبراء بمجلس الوزراء",
