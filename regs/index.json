@@ -1,0 +1,16 @@
+{
+"docs": [
+{
+"id": "labor-law",
+"title": "نظام العمل",
+"issuer": "هيئة الخبراء بمجلس الوزراء",
+"kind": "نظام",
+"legal": "مرسوم ملكي رقم م/51 وتاريخ 23/8/1426هـ",
+"source": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/08381293-6388-48e2-8ad2-a9a700f2aa94/1",
+"fetched_at": "2026-11-19",
+"sha256": "5b0d7bd29b35ed4cbf6e38e44a3330762c1d8a33b7aea959e2a57ff6bcfa82c9",
+"count": 246
+}
+],
+"updated": "2026-11-19"
+}
