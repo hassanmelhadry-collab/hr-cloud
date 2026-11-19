@@ -1,0 +1,1 @@
+async function a(e){const t=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(e));return Array.from(new Uint8Array(t)).map(n=>n.toString(16).padStart(2,"0")).join("")}async function r(e,t){return!e||!t?"none":await a(e)===t?"sealed":"tampered"}export{r as a,a as s};
