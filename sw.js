@@ -1,6 +1,6 @@
 // تطبيق الجوال: الواجهة تُحفظ على الجهاز وتفتح فورًا؛ البيانات دائمًا من الخادم
-const V = 'hr-cloud-fce898f586';
-const PRE = ["./","./assets/tajawal-latin-400-normal-BVNSOH3d.woff2","./assets/tajawal-arabic-700-normal-c-WwFYr-.woff2","./assets/tajawal-latin-700-normal-BypgxfGb.woff2","./assets/tajawal-arabic-400-normal-DIMBuZnN.woff2","./assets/index-CbjVbE8Z.css","./assets/react-Dlu0NhmP.js","./assets/supabase-f4bNl52y.js","./assets/index-CFiCHMt0.js","./assets/index-BZH6TDpT.js","./config.js","./manifest.webmanifest","./icon-192.png","./icon-512.png"];
+const V = 'hr-cloud-b363bd35a5';
+const PRE = ["./","./assets/tajawal-arabic-400-normal-DIMBuZnN.woff2","./assets/tajawal-latin-400-normal-BVNSOH3d.woff2","./assets/tajawal-arabic-700-normal-c-WwFYr-.woff2","./assets/tajawal-latin-700-normal-BypgxfGb.woff2","./assets/index-CbjVbE8Z.css","./assets/react-Dlu0NhmP.js","./assets/supabase-f4bNl52y.js","./assets/index-Dt1d3o8g.js","./assets/index-BZH6TDpT.js","./config.js","./manifest.webmanifest","./icon-192.png","./icon-512.png"];
 self.addEventListener('install', e => { e.waitUntil(caches.open(V).then(c => c.addAll(PRE.map(u => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 const put = (req, res) => { if (res && res.ok) { const cp = res.clone(); caches.open(V).then(c => c.put(req, cp)); } return res; };
